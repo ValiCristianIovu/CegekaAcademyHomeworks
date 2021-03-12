@@ -41,7 +41,7 @@ namespace Homework01
                     return true;
                 case "3":
                     PrintNrOfManufacteredCars();
-                    return false;
+                    return true;
                 case "4":
                     return false;
                 default:
