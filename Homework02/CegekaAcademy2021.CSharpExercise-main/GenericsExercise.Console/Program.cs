@@ -6,27 +6,7 @@ namespace GenericsExercise.Console
     {
         static void Main(string[] args)
         {
-            System.Console.WriteLine("\t\tCegeka Homework02 !");
-            /*
-            Student S = new Student
-            {
-                Id = "1234",
-                FisrtName = "Giani",
-                LastName = "PApa"
-
-            };
-            University U = new University
-            {
-                Id = "234",
-                Address = "strada",
-                Name = "Fabrica de smecheri"
-            };
-            CollegeStudent<Student, University> C = new CollegeStudent<Student,University>("rrr",S,U);
-
-            Persistence baza = new Persistence();
-
-            baza.InsertAsync(C);
-            */
+            System.Console.WriteLine("\t\tCegeka Homework02 !");            
             bool showMenu = true;
             while (showMenu)
             {
@@ -77,13 +57,49 @@ namespace GenericsExercise.Console
         {
             try
             {
-                string str=null;
+                string strCollegeStudentID;
+
+                string strStudentId;
+                string strStudentFirstName;
+                string strStudentLastName;
+
+                string strUniversityId;
+                string strUniversityName;
+                string strUniversityAddress;
+
+                System.Console.Write("Input the College Student ID : ");
+                strCollegeStudentID = System.Console.ReadLine();
+                ValidateId(strCollegeStudentID);
+                System.Console.Write("\n");
+
                 System.Console.Write("Input the Student ID : ");
-                str = System.Console.ReadLine();
-                if (str =="")
-                    throw new CustomException("Invalid ID");
+                strStudentId = System.Console.ReadLine();
+                ValidateId(strStudentId);
+
+                System.Console.Write("Input the Student First Name : ");
+                strStudentFirstName = System.Console.ReadLine();
+
+                System.Console.Write("Input the Student First Name : ");
+                strStudentLastName = System.Console.ReadLine();
+                System.Console.Write("\n");
+
+                System.Console.Write("Input the University ID:");
+                strUniversityId = System.Console.ReadLine();
+                ValidateId(strUniversityId);
+
+                System.Console.Write("Input the University Name:");
+                strUniversityName = System.Console.ReadLine();
+
+                System.Console.Write("Input the University Address:");
+                strUniversityAddress= System.Console.ReadLine();
+                Student S = new Student { Id = strStudentId, FisrtName = strStudentFirstName, LastName = strStudentLastName };
+                University U = new University { Id = strUniversityId, Name = strUniversityName, Address = strUniversityAddress };
+                CollegeStudent<Student, University> C = new CollegeStudent<Student, University>(strCollegeStudentID, S, U);
+
+
+                System.Console.Write("\n \n");
             }
-            catch(CustomException ex)
+            catch(InvalidIDException ex)
             {
                 System.Console.WriteLine(ex.Message);
 
@@ -91,6 +107,16 @@ namespace GenericsExercise.Console
            // System.Console.WriteLine(str);
 
 
+        }
+
+        private static void ValidateId(string str)
+        {
+            if (str == "")
+                throw new InvalidIDException(str);
+            else if (str.Length > 10)
+                throw new InvalidIDException(str.Length);
+            else if (str.ToLower().Contains('%'))
+                throw new InvalidIDException('%');
         }
     }
 }
