@@ -2,8 +2,10 @@
 
 namespace GenericsExercise.Console
 {
+    public delegate void DelegateMethod<T>(T p);
     public class Program
     {
+      
         static void Main(string[] args)
         {
             System.Console.WriteLine("\t\tCegeka Homework02 !");            
@@ -94,8 +96,9 @@ namespace GenericsExercise.Console
                 strUniversityAddress= System.Console.ReadLine();
                 Student S = new Student { Id = strStudentId, FisrtName = strStudentFirstName, LastName = strStudentLastName };
                 University U = new University { Id = strUniversityId, Name = strUniversityName, Address = strUniversityAddress };
-                CollegeStudent<Student, University> C = new CollegeStudent<Student, University>(strCollegeStudentID, S, U);
+                CollegeStudent<Student, University> C= new CollegeStudent<Student, University>(strCollegeStudentID, S, U);
 
+              
 
                 System.Console.Write("\n \n");
             }
